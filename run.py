@@ -14,7 +14,7 @@ def getDataFromDouban(s):
     # 数据字典
     data = {}
     data['q'] = s
-    data['count'] = '50'
+    # data['count'] = '50'
 
     # 注意Python2.x的区别
     url_values = urllib.parse.urlencode(data)
@@ -69,8 +69,9 @@ if __name__ == '__main__':
           line = file_object1.readline()
           if line:
               line = line[:-1]
+              line = line.lstrip()
               result = getDataFromDouban(line)
-              time.sleep(7)
+              time.sleep(8)
               ans = line
               for str in result:
                 # print(str)
@@ -78,6 +79,8 @@ if __name__ == '__main__':
               cnt = cnt + 1
               print(cnt,ans)
               f1.writelines(ans+'\n')
+              if(cnt==5):
+                  break
           else:
               break
     finally:
